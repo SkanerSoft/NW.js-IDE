@@ -1,0 +1,82 @@
+<!doctype html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+	<link rel="stylesheet" href="../themes/ide.css">
+
+	<script src="ace/ace.js"></script>
+	<script src="ace/ext-language_tools.js"></script>
+
+	<script src="../classes/ide.js"></script>
+	<script src="../classes/events.js"></script>
+	<script src="../classes/session.js"></script>
+	<script src="../classes/fs.js"></script>
+	<script src="../classes/pages.js"></script>
+	<script src="../classes/settings.js"></script>
+	<script src="../classes/dialogs.js"></script>
+	<script src="../classes/plugins.js"></script>
+
+	<style>
+		body {
+			overflow: auto;
+		}
+	</style>
+
+	<title>Hello!</title>
+</head>
+<body>
+
+<div id="editor"></div>
+
+<script>
+	var file = location.hash.replace('#', '');
+	var _error = false;
+	var filename = Fs.parse(file)['name'];
+
+	if (!Fs.is_file(file)) {
+		_error = true;
+	} else {
+		var img = $create('img');
+
+		var origWidth = 0;
+
+		img.onload = function () {
+			origWidth = this.width;
+		};
+
+		img.src = 'file://'+file;
+
+		img.onclick = function (e) {
+			this.width = this.width > W.innerWidth ? W.innerWidth : origWidth;
+		};
+
+		$('editor').appendChild(img);
+	}
+
+
+
+	// RUN EVENT ////////////////////////////////////////////////////
+	Events.run('editor:loaded', W, editor);
+	/////////////////////////////////////////////////////////////////
+
+	W.addEventListener('load', function () {
+		Pages.update_keys(file);
+		// RUN EVENT ////////////////////////////////////////////////////
+		Events.run('page:loaded', W);
+		/////////////////////////////////////////////////////////////////
+	});
+
+	if (_error) {
+		SAVE = RELOAD = GET = CUT = PASTE = COPY = {};
+		s().setValue('Файл '+file+' не найден.\nПопробуйте открыть файл из дерева файлов.');
+	}
+
+	// LOAD THEME ///////////////////////////////////////////////////
+	$set_theme(Sett.get('ide_theme'), '../');
+	/////////////////////////////////////////////////////////////////
+
+</script>
+
+</body>
+</html>

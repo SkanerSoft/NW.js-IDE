@@ -1,0 +1,605 @@
+@font-face {
+	font-family: Ubt;
+	src: url('fonts/ubuntu.ttf');
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	outline: none;
+}
+
+body {
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+
+.site {
+	display: flex;
+	flex-direction: column;
+}
+
+input, select, textarea {
+	padding: 2px 4px;
+}
+
+
+/* BUTTONS */
+
+.hnd {
+	cursor: pointer;
+}
+
+button, .btn {
+	padding: 2px 4px;
+	border: none;
+	cursor: pointer;
+}
+
+button:hover, .btn:hover {
+
+}
+
+.btn_pad {
+	padding: 10px 20px;
+}
+
+.btn_pad2 {
+	padding: 5px 10px;
+}
+
+.btn_red {
+
+}
+
+.btn_red:hover {
+
+}
+
+.full_width, .full {
+	width: 100%;
+}
+
+.link {
+	cursor: pointer;
+}
+
+.link:hover {
+
+}
+
+.small {
+	font-size: 11px;
+}
+
+.text_l {
+	text-align: left;
+}
+
+pre {
+	tab-size: 2;
+	font-size: 12px;
+}
+
+
+/* IDE */
+
+.ide_close {
+
+}
+
+.ide_close:hover {
+
+}
+
+
+/* SYSTEM */
+
+.font {
+	font-family: Ubt;
+}
+
+
+
+
+
+/* MENU */
+
+.menu {
+	user-select: none;
+	font-family: Ubt;
+	font-size: 9px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 24px;
+}
+
+.menu_items .btn {
+	padding: 10px;
+	font-size: 11px;
+	font-family: Ubt;
+}
+
+.menu_system .btn {
+	padding: 10px;
+	font-size: 11px;
+	font-family: Ubt;
+}
+
+.drag_window {
+	cursor: move;
+	-webkit-app-region: drag;
+	text-align: center;
+	flex: 1;
+}
+
+
+
+
+/* MAIN */
+
+.main {
+	display: flex;
+	align-items: stretch;
+	flex: 1;
+}
+
+.framebox {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+
+
+/* Editor Tools */
+.tool_list button {
+
+}
+
+.tool_title {
+	text-align: center;
+	padding: 10px;
+}
+
+.editor_tool {
+	position: fixed;
+	width: 300px;
+	height: 100%;
+	top: 0;
+	z-index: 101;
+	font-family: Ubt;
+	font-size: 15px;
+	overflow: auto;
+}
+
+
+
+
+
+/* Actions panel */
+
+.actions_panel {
+	display: flex;
+}
+
+.system_actions {
+
+}
+
+.actions {
+	flex: 1;
+	text-align: right;
+	margin-left: 5px;
+}
+
+
+
+
+
+/* Debug */
+
+/* for system buttons */
+
+.running {
+
+}
+
+.debug {
+	height: 120px;
+	overflow-x: scroll;
+	overflow-y: scroll;
+	font-family: Ubt;
+	font-size: 12px;
+}
+
+.debug_message {
+	margin-bottom: 1px;
+	padding: 2px;
+}
+
+.debug_error {
+	font-weight: bolder;
+}
+
+
+
+
+
+
+/* Tabs */
+
+.tabs {
+	font-family: Ubt;
+	font-size: 12px;
+	user-select: none;
+}
+
+.tabs_drop {
+
+}
+
+.tab {
+	padding: 3px 6px;
+	border: none;
+	cursor: pointer;
+	display: inline-block;
+}
+
+.tab_selected {
+
+}
+
+.tab .close {
+	padding: 1px 4px;
+	margin-left: 5px;
+}
+
+.tab_selected .close {
+
+}
+
+.tab .close:hover {
+
+}
+
+
+
+
+/* Frames */
+
+.frames {
+	flex: 1;
+}
+
+.frame {
+	border: none;
+	width: 100%;
+	height: 100%;
+}
+
+
+
+
+/* Dialog */
+
+.dialog_back_trans {
+	background-color: transparent;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+}
+
+.dialog_back {
+	opacity: 0.8;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+}
+
+.dialog {
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	z-index: 102;
+}
+
+.dialog_top {
+	display: flex;
+}
+
+.dialog_title {
+	flex: 1;
+	padding: 5px 10px;
+	font-family: Ubt;
+}
+
+.dialog_close {
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+.dialog_close:hover {
+
+}
+
+.dialog_inner {
+	padding: 20px;
+}
+
+.dialog_field {
+	flex: 1;
+	overflow: auto;
+}
+
+.notify_ok {
+	position: fixed;
+	padding: 5px 10px;
+}
+
+.notify_no {
+	position: fixed;
+	padding: 5px 10px;
+}
+
+.notify_info {
+	position: fixed;
+	padding: 5px 10px;
+}
+
+
+
+/* Files */
+
+.files_tools {
+	position: fixed;
+	padding: 1px;
+}
+
+.files_tools button {
+	padding: 5px 10px;
+}
+
+.files {
+	width: 200px;
+	min-width: 200px;
+}
+
+.files_item {
+	display: flex;
+	margin: 1px;
+	font-family: Ubt;
+	font-size: 13px;
+	cursor: pointer;
+	user-select: none;
+}
+
+.files_item:hover {
+
+}
+
+.files_item_name {
+	padding: 2px;
+	margin-left: 5px;
+	flex: 1;
+}
+
+.files_item_menu {
+	padding: 2px 4px;
+	cursor: pointer;
+}
+
+.files_item_menu:hover {
+
+}
+
+.fies_item_menu_dialog {
+	position: fixed;
+	padding: 2px;
+	z-index: 100;
+}
+
+.fies_item_menu_dialog button {
+	padding: 5px 10px;
+}
+
+.files_item_close:hover {
+
+}
+
+.type_icon {
+	margin: 5px 0 0 3px;
+	display: inline-block;
+	width: 11px; height: 11px;
+	border-radius: 2px;
+}
+
+.type_folder {
+
+}
+
+.type_js {
+
+}
+
+.type_json {
+
+}
+
+.type_html {
+
+}
+
+.type_css {
+
+}
+
+.type_php {
+
+}
+
+.is_joint {
+	border-radius: 50%;
+}
+
+
+
+/* Commands */
+.cmd {
+	position: fixed;
+	width: 600px;
+	height: 300px;
+	z-index: 51;
+	padding: 10px;
+	font-family: Ubt;
+}
+
+.cmd_list {
+	flex: 1;
+	overflow: auto;
+}
+
+.cmd_line {
+	padding-top: 5px;
+	display: flex;
+}
+
+.cmd_command {
+	flex: 1;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+
+/* Context Area */
+
+.context_area {
+	position: fixed;
+	z-index: 50;
+	overflow-y: auto;
+	min-width: 100px;
+	padding: 1px;
+}
+
+.context_area button {
+	padding: 5px 10px;
+}
+
+
+
+
+/* UI Editor */
+/* in pages/ui_editor/style.css */
+
+
+/* Plugins */
+
+.plugin {
+	padding: 10px;
+	margin-bottom: 2px;
+}
+
+
+
+/* Templates */
+
+.template {
+	padding: 10px;
+	margin-bottom: 2px;
+	display: flex;
+}
+
+.template .t_left {
+	width: 200px;
+}
+
+.template .t_left img {
+	width: 100%;
+}
+
+.template .t_right {
+	flex: 1;
+	padding-left: 10px;
+}
+
+
+
+
+/* Terminal */
+
+.terminal {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	font-family: 'Courier New';
+	font-size: 12px;
+}
+
+.terminal_in {
+
+}
+
+.terminal_in input {
+	font-family: 'Courier New';
+}
+
+.terminal_out {
+	flex: 1;
+	padding: 5px;
+	overflow-y: auto;
+}
+
+.terminal_msg_cmd {
+
+}
+
+.terminal_msg_err {
+
+}
+
+
+
+
+
+/* Scroll Bars */
+
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+::-webkit-scrollbar-track {
+
+}
+
+::-webkit-scrollbar-thumb {
+
+}
+
+
+
+/* Other */
+
+.as_flex {
+	display: flex;
+}
+
+.as_flex .flex {
+	flex: 1;
+}
+
+
+
+
+
+

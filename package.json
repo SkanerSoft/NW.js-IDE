@@ -1,0 +1,21 @@
+{
+  "name": "nwjs_ide",
+  "version": "0.0.8",
+  "main": "index.html",
+  "window": {
+    "title": "NW.js IDE",
+    "icon": "logo.png",
+    "frame": false,
+    "width": 900,
+    "height": 500,
+    "position": "center",
+    "min_width": 600,
+    "min_height": 300
+  },
+  "chromium-args": "--touch-events --enable-touch-drag-drop --allow-file-access-from-files",
+  "dependencies": {
+    "nw-builder": "^3.5.1",
+    "targz": "^1.0.1",
+    "unzip": "^0.1.11"
+  }
+}

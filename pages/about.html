@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+	<link rel="stylesheet" href="../themes/ide.css">
+
+	<script src="../classes/ide.js"></script>
+	<script src="../classes/settings.js"></script>
+	<script src="../classes/fs.js"></script>
+
+	<style>
+		body {
+			padding: 10px;
+			overflow-y: auto;
+		}
+
+		h3 {
+			text-align: left;
+			margin-bottom: 10px;
+		}
+
+		button {
+			margin: 5px;
+			padding: 5px;
+			border: 1px solid #393e4b;
+		}
+
+		.icon {
+			height: 80px;
+			margin-right: 20px;
+		}
+	</style>
+
+	<title>Hello!</title>
+</head>
+<body class="font">
+<h3><img class="icon" align="absmiddle" src="../logo.png"> NW.js IDE</h3>
+Бесплатная кроссплатформенная среда программирования и разработки приложений и игр.
+Поддерживаемые языки и типы файлов: JavaScript, JSON, HTML, CSS, PHP.
+<div align="right">
+	<button onclick="$go('http://nwjs.ru');">Сайт NW.js IDE</button>
+	<button onclick="$go('https://www.youtube.com/SkanerSoft?sub_confirmation=1');">Видео уроки</button>
+</div>
+
+<br>
+<h3> <img class="icon" align="absmiddle" src="about/nw_logo.png"> NW.js</h3>
+Бесплатная среда для создания окружения, позволяющего запускать JavaScript приложения
+на десктопе (Windows, Linux, MacOS) с возможностью сборки проекта, как цельного приложение.
+<div align="right">
+	<button onclick="$go('http://nwjs.io');">Сайт NW.js</button>
+	<button onclick="$go('https://www.youtube.com/SkanerSoft?sub_confirmation=1');">Видео уроки</button>
+</div>
+
+
+<br>
+<h3>Дерево файлов</h3>
+<ul>
+	<li><b class="type_icon type_folder"></b> - Папка</li>
+	<li><b class="type_icon type_js"></b> - *.js | файл JavaScript</li>
+	<li><b class="type_icon type_json"></b> - *.json | файл JSON</li>
+	<li><b class="type_icon type_html"></b> - *.html | файл HTML</li>
+	<li><b class="type_icon type_css"></b> - *.css | файл CSS</li>
+	<li><b class="type_icon type_php"></b> - *.php | файл PHP</li>
+	<li><b class="type_icon is_joint"></b> - *.[exp]+ | собираемый файл Joint (цвет иконки зависит от расширения [exp])</li>
+
+</ul>
+
+
+
+<br><br>
+<h3>Горячие клавиши редактора кода</h3>
+<ul>
+	<li>Ctrl+S - Сохранить файл</li>
+	<li>Ctrl+F - Поиск по файлу</li>
+	<li>Ctrl+H - Поиск и замена</li>
+	<li>Ctrl+D - Удалить выделенное (или строку)</li>
+
+	<li>Ctrl+Shift+Up (Alt+Up) - Передвинуть выделенное (или строку) вверх</li>
+	<li>Ctrl+Shift+Down (Alt+Down) - Передвинуть выделенное (или строку) вниз</li>
+
+	<li>Ctrl+Enter - Запуск проекта</li>
+
+	<li>Ctrl+Click - Установить дополнительный курсор ввода</li>
+
+</ul>
+
+
+<br><br>
+<h3>Спонсоры проекта</h3>
+Кловак Дмитрий
+
+<br><br>
+
+<script>
+	// LOAD THEME ///////////////////////////////////////////////////
+	$set_theme(Sett.get('ide_theme'), '../');
+	/////////////////////////////////////////////////////////////////
+</script>
+
+</body>
+</html>

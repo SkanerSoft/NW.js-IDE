@@ -1,0 +1,10 @@
+{
+	"name" : "units.js",
+	"minify" : false,
+	"units" : [
+		"unit_a.js",
+		"unit_b.js",
+		"unit_c.js",
+		"unit_d.js"
+	]
+}

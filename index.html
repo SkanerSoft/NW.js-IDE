@@ -1,0 +1,83 @@
+<!doctype html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+	<link rel="stylesheet" href="themes/ide.css">
+
+	<script src="classes/ide.js"></script>
+	<script src="classes/events.js"></script>
+	<script src="classes/fs.js"></script>
+	<script src="classes/pages.js"></script>
+	<script src="classes/dialogs.js"></script>
+	<script src="classes/project.js"></script>
+	<script src="classes/files.js"></script>
+	<script src="classes/debug.js"></script>
+	<script src="classes/units.js"></script>
+	<script src="classes/settings.js"></script>
+	<script src="classes/lang.js"></script>
+	<script src="classes/node.js"></script>
+	<script src="classes/legacy.js"></script>
+	<script src="classes/term.js"></script>
+	<script src="classes/plugins.js"></script>
+	<script src="classes/net.js"></script>
+	<script src="classes/session.js"></script>
+	<script src="classes/commands.js"></script>
+	<script src="classes/joint.js"></script>
+
+	<title>NW.js IDE</title>
+</head>
+<body class="site">
+<div id="menu" class="menu">
+	<div id="menu_items" class="menu_items">
+		<span class="btn" title="{new_project}" onclick="Dial.new_project();">Новый</span>
+		<span class="btn" onclick="Dial.open_project();">Открыть</span>
+		<span class="btn" onclick="Dial.re_type_project();">Опции</span>
+		<!--<span class="btn" onclick="Dial.project_templates();">Шаблоны</span>-->
+	</div>
+	<div id="ide_title" class="drag_window">NW.js IDE</div>
+	<div id="menu_system" class="menu_system">
+		<span class="btn" onclick="Pages.add('pages/about.html', 'Справка')">Справка</span>
+		<span class="btn" onclick="Pages.add('pages/settings.html', 'Настройки')">Настройки</span>
+		<span class="btn" onclick="IDE.min();">&mdash;</span>
+		<span class="btn" onclick="IDE.full();"><span style="display:inline-block;border:1px solid;padding:3px 3px"></span></span>
+		<span class="btn ide_close" onclick="IDE.close();">&#10006;</span>
+	</div>
+</div>
+<div id="main" class="main">
+	<div id="files" class="files"></div>
+	<div id="framebox" class="framebox">
+		<div class="actions_panel">
+			<span id="system_actions">
+				<button title="{hide}" onclick="this.innerHTML = Files.sh() ? '&#9668;' : '&#9658;'">&#9668;</button>
+				<button title="{save}" onclick="Pages.save_active();">Сохранить</button>
+				<button title="{restore}" onclick="Pages.restore_active();">Восстановить</button>
+			</span>
+			<span id="actions" class="actions">
+
+			</span>
+		</div>
+		<div id="tabs" class="tabs"></div>
+		<div id="frames" class="frames"></div>
+		<div id="debug" class="debug"></div>
+	</div>
+</div>
+<script>
+	// INIT PLUGINS /////////////////////////////////////////////////
+	Plugins.call_all('pre-init');
+	/////////////////////////////////////////////////////////////////
+
+	IDE.init();
+	Sett.load();
+	Lang.init();
+
+	// RUN EVENT ////////////////////////////////////////////////////
+	Events.run('app:init', W);
+	/////////////////////////////////////////////////////////////////
+
+	// LOAD THEME ///////////////////////////////////////////////////
+	$set_theme(Sett.get('ide_theme'));
+	/////////////////////////////////////////////////////////////////
+</script>
+</body>
+</html>

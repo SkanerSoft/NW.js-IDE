@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+	<link rel="stylesheet" href="../themes/ide.css">
+
+	<script src="../classes/ide.js"></script>
+	<script src="../classes/pages.js"></script>
+	<script src="../classes/fs.js"></script>
+	<script src="../classes/dialogs.js"></script>
+	<script src="../classes/project.js"></script>
+	<script src="../classes/debug.js"></script>
+	<script src="../classes/settings.js"></script>
+
+	<title>Compile NW.js</title>
+
+	<style>
+
+		body {
+			padding: 20px;
+			overflow-y: auto;
+		}
+
+		table {
+			width: 100%;
+		}
+
+		td:first-child {
+			width: 200px;
+			font-size: 10pt;
+		}
+
+		td input {
+			width: 85%;
+		}
+	</style>
+
+</head>
+<body class="font">
+<table>
+	<tr><td><b>Сборка исполняемого файла</b><td>
+	<tr><td>Папка для сборки<td><input type="text" oninput="Project.set('build_dir', this.value)" id="b_path"><button onclick="_sel_dir('b_path');">...</button>
+	<tr><td>Платформа<td><select id="b_platform">
+		<option>Linux64</option>
+		<option>Linux32</option>
+		<option>Windows64</option>
+		<option>Windows32</option>
+		<option>MacOS64</option>
+		</select>
+	<tr><td>Режим сборки<td><select id="b_flavor">
+		<option>Normal</option>
+		<option>SDK</option>
+		</select>
+
+	<tr><td height="10"><td>
+	<tr><td><b>Опции Windows</b><td>
+	<tr><td>Путь до иконки *.ico<td><input type="text" oninput="Project.set('winico', this.value);" id="b_winico"><button onclick="_sel_file('b_winico');">...</button>
+
+	<tr><td height="10"><td>
+	<tr><td><b>Опции Mac OS</b><td>
+	<tr><td>Путь до иконки *.icns<td><input type="text" oninput="Project.set('macico', this.value);" id="b_macico"><button onclick="_sel_file('b_macico');">...</button>
+
+
+
+</table>
+
+<br>
+<div align="right">
+	<button id="btn_build" class="btn_pad">Собрать проект</button>
+</div>
+
+<br>
+Если вы работаете под Linux или MacOS, то, чтобы установить икноку приложения для Windows, необходимо наличие установленного
+пакета Wine и "Wine Mono".
+<script>
+
+	$('b_path').value = Project.get('build_dir') || '';
+	$('b_winico').value = Project.get('winico') || '';
+	$('b_macico').value = Project.get('macico') || '';
+
+	var console = {
+		log: Debug.msg,
+		error : Debug.err
+	};
+
+	var delm = Fs.delm;
+
+	var _sel_dir = function (id) {
+		Dial.dir('', function (dir) {
+			$(id).value = dir;
+			$(id).oninput();
+		});
+	};
+
+	var _sel_file = function (id) {
+		Dial.file('', function (dir) {
+			$(id).value = dir;
+			$(id).oninput();
+		});
+	};
+
+	var _build = function (path, platform, flavor, opts) {
+		parent.$select('_btn_build_nw');
+		Debug.open();
+		Debug.msg('Сборка начинается...');
+		var NwBuilder = require('nw-builder');
+		var nwb = new NwBuilder({
+			files: Project.path+'/**/**',
+			platforms: [platform],
+			version: 'latest',
+			flavor: flavor,
+			buildDir: path,
+			cacheDir: Fs.dp(Fs.home+'/nw_build_cash'),
+
+			winIco : opts.winIco,
+			macIcns : opts.macIcns
+		});
+
+		nwb.on('log',  Debug.msg);
+
+		nwb.build().then(function () {
+			Debug.msg('Сборка завершена.');
+			parent.$unselect('_btn_build_nw');
+		}).catch(function (error) {
+			Debug.err('Ошибка сборки. Системный вывод: '+error);
+			parent.$unselect('_btn_build_nw');
+		});
+	};
+
+
+	$('btn_build').onclick = function (e) {
+
+		var plts = {
+			'Linux32' : 'linux32',
+			'Linux64' : 'linux64',
+			'Windows32' : 'win32',
+			'Windows64' : 'win64',
+			'MacOS64' : 'osx64'
+		};
+
+		var path = Fs.dp($('b_path').value.trim());
+		var platform = plts[$('b_platform').value];
+
+		if (!Fs.is_dir(Fs.home+'/wn_build_cash')) {
+			Fs.add_dir(Fs.home+'/wn_build_cash');
+		}
+
+		if (!Fs.is_dir(path)) {
+			Fs.add_dir(Project.path+'/build');
+			path = Fs.dp(Project.path+'/build');
+		}
+
+		var flvs = {
+			'Normal' : 'normal',
+			'SDK' : 'sdk'
+		};
+
+		var flavor = flvs[$('b_flavor').value];
+
+		var opts = {
+			winIco : $('b_winico').value.toString().trim(),
+
+			macIcns : $('b_macico').value.toString().trim()
+		};
+
+		if (platform === 'osx64') {
+			opts['zip'] = true;
+		}
+
+		_build(path, platform, flavor, opts);
+	};
+
+	var SAVE = function () {
+		Project.save_project();
+	};
+
+	// LOAD THEME ///////////////////////////////////////////////////
+	$set_theme(Sett.get('ide_theme'), '../');
+	/////////////////////////////////////////////////////////////////
+</script>
+
+</body>
+</html>

@@ -1,0 +1,458 @@
+input, select, textarea {
+	border: 1px solid #484848;
+	background-color: #3c3c3c;
+	color: #cecece;
+}
+
+body {
+	color: #eaeaea;
+}
+
+/* BUTTONS */
+
+button, .btn {
+	background-color: #2b2b2b;
+	color: #c8c8c8;
+}
+
+button:hover, .btn:hover {
+	background-color: #343434;
+	color: #ffffff;
+}
+
+.btn_red {
+	background-color: #8a4742;
+	color: #d3d3d3;
+}
+
+.btn_red:hover {
+	background-color: #a85650;
+	color: #fafaff;
+}
+
+.link {
+	color: #aeffb1;
+}
+
+.link:hover {
+	color: #ffef79;
+}
+
+
+
+
+
+
+/* IDE */
+
+.ide_close {
+
+}
+
+.ide_close:hover {
+	background-color: #a85650;
+	color: #fafaff;
+}
+
+
+
+
+
+
+/* MENU */
+
+.menu {
+	background-color: #2b2b2b;
+	color: #a1a1a1;
+}
+
+.menu_items button {
+
+}
+
+.menu_system button {
+
+}
+
+
+
+
+/* MAIN */
+
+.main {
+	border: 1px solid #4b4b4b;
+}
+
+.framebox {
+
+}
+
+
+
+/* Editor Tools */
+.tool_list button {
+	color: #ededed;
+}
+
+.tool_title {
+	background-color: #343434;
+}
+
+.editor_tool {
+	background-color: #3c3c3c;
+}
+
+
+
+
+
+/* Actions panel */
+
+.actions_panel {
+	background-color: #242424;
+	border-bottom: 1px solid #454545;
+}
+
+.system_actions {
+
+}
+
+.actions {
+
+}
+
+
+
+
+
+/* Debug */
+
+/* for system buttons */
+
+.running {
+	color: #50ff49;
+}
+
+.debug {
+	border-top: 1px solid #454545;
+	background-color: #282828;
+	color: #69a882;
+}
+
+.debug_message {
+	border-bottom: 1px solid #404040;
+}
+
+.debug_error {
+	color: #ff4f5a;
+}
+
+
+
+
+
+
+/* Tabs */
+
+.tabs {
+	background-color: #272727;
+}
+
+.tabs_drop {
+	background-color: #41503d;
+}
+
+.tab {
+	background-color: #272727;
+	color: #8d8d8d;
+}
+
+.tab_selected {
+	color: #f5f5f5;
+	background-color: #3e3e3e;
+}
+
+.tab .close {
+	color: #8a8a8d;
+}
+
+.tab_selected .close {
+	color: #fbfbff;
+}
+
+.tab .close:hover {
+	background-color: #cf5639;
+	color: #fbfbff;
+}
+
+
+
+
+/* Frames */
+
+.frames {
+	background-color: #2e2e2e;
+}
+
+
+
+
+
+
+/* Dialog */
+
+.dialog_back_trans {
+	background-color: transparent;
+}
+
+.dialog_back {
+	background-color: #100c13;
+}
+
+.dialog {
+	background-color: #292929;
+}
+
+.dialog_top {
+	background-color: #353535;
+}
+
+.dialog_title {
+
+}
+
+.dialog_close {
+	background-color: #8a4742;
+	color: #d3d3d3;
+}
+
+.dialog_close:hover {
+	background-color: #a85650;
+	color: #fafaff;
+}
+
+.notify_ok {
+	background-color: #314233;
+	color: white;
+}
+
+.notify_no {
+	background-color: #d4473a;
+	color: white;
+}
+
+.notify_info {
+	background-color: #24538d;
+	color: white;
+}
+
+
+
+/* Files */
+
+.files_tools {
+	border: 1px solid #444444;
+	background-color: #2a2a2a;
+}
+
+.files_tools button {
+
+}
+
+.files {
+	background-color: #2c2c2c;
+	border-right: 1px solid #4c4c4c;
+}
+
+.files_item {
+	background-color: #393939;
+	color: #b6b6b6;
+}
+
+.files_item:hover {
+	background-color: #4b4b4b;
+	color: #e2e2e2;
+}
+
+.files_item_name {
+
+}
+
+.files_item_menu {
+	color: #6e6e6e;
+}
+
+.files_item_menu:hover {
+	background-color: #525252;
+	color: white;
+}
+
+.fies_item_menu_dialog {
+	background-color: #3c3c3c;
+}
+
+.fies_item_menu_dialog button {
+
+}
+
+.files_item_close:hover {
+	background-color: #8a4742;
+	color: white;
+}
+
+.type_icon {
+	background-color: #373737;
+	border: 1px solid #8d8d8d;
+}
+
+.type_folder {
+	background-color: #4c4c4c;
+	border: 1px solid #858585;
+}
+
+.type_js {
+	background-color: #514409;
+	border: 1px solid #aa9b16;
+}
+
+.type_json {
+	background-color: #513612;
+	border: 1px solid #aa7118;
+}
+
+.type_html {
+	background-color: #1f5121;
+	border: 1px solid #41aa3a;
+}
+
+.type_css {
+	background-color: #2c5051;
+	border: 1px solid #50aaa7;
+}
+
+.type_php {
+	background-color: #2f3751;
+	border: 1px solid #5184aa;
+}
+
+.type_ui {
+	background-color: #3a1e21;
+	border: 1px solid #aa3a37;
+}
+
+
+
+
+/* Commands */
+.cmd {
+	background-color: #3c3c3c;
+}
+
+.cmd_list {
+	background-color: #3f3f3f;
+}
+
+.cmd_line {
+
+}
+
+.cmd_command {
+	background-color: #373737;
+}
+
+
+/* Context Area */
+
+.context_area {
+	background-color: #3f3f3f;
+	border: 1px solid #414141;
+}
+
+.context_area button {
+
+}
+
+
+
+
+
+
+
+/* Plugins */
+
+.plugin {
+	color: #d7d7d7;
+	background-color: #404040;
+}
+
+
+
+/* Templates */
+
+.template {
+	color: #d7d7d7;
+	background-color: #404040;
+}
+
+.template img {
+	border-radius: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Terminal */
+
+.terminal {
+	background-color: #292929;
+	color: #b7f5bc;
+}
+
+.terminal_in {
+	border-top: 1px solid #3f3f3f;
+}
+
+.terminal_in input {
+
+}
+
+.terminal_out {
+
+}
+
+.terminal_msg_cmd {
+	color: #8fff8f;
+}
+
+.terminal_msg_err {
+	color: #ff776d;
+}
+
+
+
+
+
+/* Scroll Bars */
+
+::-webkit-scrollbar {
+	background-color: #272727;
+}
+
+::-webkit-scrollbar-track {
+	background-color: #252525;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #696969;
+}
+
+::-webkit-scrollbar-corner {
+	background-color: #252525;
+}

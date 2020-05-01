@@ -1,0 +1,305 @@
+@font-face {
+	font-family: Ubt;
+	src: url('../../themes/fonts/ubuntu.ttf');
+}
+
+* {
+	margin: 0;
+	box-sizing: border-box;
+}
+
+textarea, input {
+	resize: none;
+	outline: none;
+}
+
+.as_flex {
+	display: flex;
+}
+
+.as_flex .flex {
+	flex: 1;
+}
+
+.hnd {
+	cursor: pointer;
+}
+
+#_root_ui_editor {
+	display: flex;
+	height: 100vh;
+}
+
+#ui_palitra {
+	width: 250px;
+	user-select: none;
+	font-size: small;
+	overflow: auto;
+	font-family: Ubt;
+}
+
+#_ui_palitra {
+
+}
+
+#_ui_form_templates {
+	overflow: hidden;
+	max-height: 200px;
+}
+
+#_ui_editor_root {
+	position: relative;
+	display: inline-flex;
+	flex-direction: column;
+}
+
+#_ui_editor {
+	flex: 1;
+	padding: 5px;
+	overflow: auto;
+}
+
+#_ui_title {
+	overflow: auto;
+	position: relative;
+	border: none;
+	font-size: small;
+	font-weight: bold;
+	padding: 5px;
+	text-align: center;
+	border-radius: 3px 3px 0 0;
+	user-select: none;
+	font-family: Ubt;
+}
+
+#_ui_body {
+	overflow: auto;
+	width: 640px;
+	height: 380px;
+	padding: 0;
+}
+
+#_ui_body * {
+	cursor: default;
+	outline: none;
+}
+
+
+
+
+
+
+
+.def_css_all {
+	cursor: default;
+	outline: none;
+}
+
+.def_css_div {
+
+}
+
+._ui_box {
+	box-shadow: 0 0 2px 1px red, 0 0 2px 2px white !important;
+}
+
+.can_drop {
+	box-shadow: 0 0 3px 2px #427828, 0 0 2px 4px #FFBC00 !important;
+}
+
+.not_can_drop {
+	box-shadow: -5px 0 1px 1px #786240, -5px 0 1px 1px #ffb793 !important;
+}
+
+#_ui_body *[data-tag] {
+	transition-duration: 200ms;
+}
+
+#_ui_body *[data-tag]:hover {
+	box-shadow: 0 0 3px 2px #B4F0B4, 0 0 5px 1px #417244;
+}
+
+
+
+
+
+#ui_object {
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+	user-select: none;
+	font-size: small;
+	text-align: center;
+	font-family: Ubt;
+}
+
+#ui_object table{
+	width: 100%;
+}
+
+#ui_object td {
+	font-size: small;
+	padding: 0 5px;
+	text-align: left;
+}
+
+#ui_object td:first-child {
+	text-align: right;
+	width: 10px;
+}
+
+
+
+.flow {
+	overflow: hidden;
+	transition-duration: 200ms;
+}
+
+
+
+#_ui_control button {
+
+}
+
+
+#ui_settings {
+	flex: 1;
+	overflow: auto;
+}
+
+#ui_settings textarea, #ui_settings input {
+	padding: 2px;
+	width: 100%;
+}
+
+._ui_edit_in_table {
+	display: flex;
+}
+
+#css_settings {
+
+}
+
+#events_settings_area {
+	height: 150px;
+	width: 100%;
+	padding: 5px;
+	border: none;
+}
+
+#css_settings_area {
+	height: 200px;
+	width: 100%;
+	padding: 5px;
+	border: none;
+}
+
+._ui_header {
+	display: block;
+	text-align: center;
+	padding: 5px;
+	font-weight: bold;
+	border-width: 1px 0 1px 0;
+}
+
+._ui_btn {
+	text-align: center;
+	padding: 5px 10px;
+	font-weight: bold;
+	margin: 2px;
+	cursor: pointer;
+}
+
+.btn {
+	display: inline-block;
+	padding: 4px 8px;
+	cursor: pointer;
+	margin: 2px;
+}
+
+.black_input {
+
+}
+
+._ui_cat {
+	text-align: left;
+	padding: 5px;
+	font-weight: bold;
+	display: flex;
+	cursor: pointer;
+	border-radius: 5px;
+	margin: 2px;
+}
+
+._ui_opcl {
+	transition-duration: 200ms;
+}
+
+._ui_cat_items {
+	text-align: center;
+	overflow: hidden;
+	transition-duration: 200ms;
+}
+
+._ui_cat_item {
+	max-width: 29%;
+	transition-duration: 200ms;
+	border-radius: 5px;
+	padding: 5px;
+	margin: 2px;
+	cursor: pointer;
+	display: inline-block;
+	font-size: smaller;
+	text-align: center;
+}
+
+._ui_cat_item img {
+	width: 90%;
+}
+
+._ui_cat_item:hover {
+
+}
+
+._ui_tree * {
+	transition-duration: 200ms;
+}
+
+._ui_tree_items {
+	margin-left: 6px;
+}
+
+._ui_tree_select {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+::-webkit-scrollbar {
+	background-color: transparent;
+	width: 5px;
+	height: 5px;
+}
+
+::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #777777;
+}
+
+::-webkit-scrollbar-corner {
+	background-color: transparent;
+}

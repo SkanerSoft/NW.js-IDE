@@ -1,0 +1,28 @@
+<!doctype html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+	<link rel="stylesheet" href="../themes/ide.css">
+
+	<script src="../classes/ide.js"></script>
+	<script src="../classes/settings.js"></script>
+	<script src="../classes/fs.js"></script>
+
+	<title>Hello!</title>
+</head>
+<body class="font">
+	<div style="margin-top: 40vh;" align="center"><h1>Добро пожаловать в NW.js IDE</h1></div>
+	<br>
+	<div style="margin: 40px; text-align: justify">
+		Если хотите создавать приложения на NW.js, качайте актуальную версию на сайте <b class="link" onclick="$go('http://nwjs.io')">nwjs.io</b>,
+		распакуйте скачанный архив в удобное место и просто укажите путь до исполняего файла в настройках.
+	</div>
+
+	<script>
+		// LOAD THEME ///////////////////////////////////////////////////
+		$set_theme(Sett.get('ide_theme'), '../');
+		/////////////////////////////////////////////////////////////////
+	</script>
+</body>
+</html>

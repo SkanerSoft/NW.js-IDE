@@ -1,0 +1,106 @@
+*[data-tag] {
+	outline: none;
+	border-radius: 2px;
+}
+
+*[data-tag="root"] {
+	background-color: #eeeeee;
+}
+
+*[data-tag="button"], *[data-tag="list"], *[data-tag="color"] {
+	background: linear-gradient(to bottom, #f4f5f5, #dfdddd) #dfdddd;
+	border: 1px solid #b6b6b6;
+}
+
+*[data-tag="button"]:active, *[data-tag="list"]:active, *[data-tag="color"]:active {
+	background: linear-gradient(to bottom, #dfe0e0, #e9e7e7) #e9e7e7;
+}
+
+*[data-tag="input"] {
+	border: 1px solid #ADADAD;
+	background-color: #f1f1f1;
+}
+
+
+*[data-tag="checkbox"] b {
+	border: 1px solid #ADADAD;
+	background-color: #DCDCDC;
+}
+
+*[data-tag="checkbox"][data-checked="true"] b {
+	background-color: #777777;
+	border-color: #9e9e9e;
+	box-shadow: 0 0 1px 1px #a8a8a8;
+	border-radius: 50%;
+}
+
+*[data-tag="progress"] {
+	border: 1px solid #9c9c9c;
+	background: linear-gradient(to bottom, #dfe0e0, #e9e7e7) #e9e7e7;
+}
+
+*[data-tag="progress"] b {
+	background: linear-gradient(to bottom, #f4f5f5, #bfbdbd) #dfdddd;
+	border-right: 1px solid #666666;
+}
+
+*[data-tag="listbox"] {
+	border: 1px solid #B9B9B9;
+	background-color: #eaeaea;
+}
+
+*[data-tag="listbox"] span {
+
+}
+
+*[data-tag="listbox"] span[data-selected="true"] {
+	background: #bfbdbd;
+	color: #212121;
+}
+
+*[data-tag="range"] {
+	border: 1px solid #b4b4b4;
+}
+
+*[data-tag="range"] b {
+	background: linear-gradient(to bottom, #f4f5f5, #b3b1b1) #dfdddd;
+}
+
+*[data-tag="tabs"] {
+	border: 1px solid #c7c7c7;
+}
+
+*[data-tag="tabs"] *[data-tab] {
+	background: linear-gradient(to bottom, #FBFBFB, #E5E5E5) #E5E5E5;
+	color: #7E7E7E;
+}
+
+*[data-tag="tabs"] *[data-tab="selected"] {
+	background: linear-gradient(to bottom, #E5E5E5, #FBFBFB) #FBFBFB;
+	color: #353535;
+}
+
+*[data-tag="tabs"] .name {
+
+}
+
+*[data-tag="tabs"] .close {
+
+}
+
+*[data-tag="tabs"] .close:hover {
+	color: #FF0000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

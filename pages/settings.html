@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+	<link rel="stylesheet" href="../themes/ide.css">
+
+	<script src="../classes/ide.js"></script>
+	<script src="../classes/project.js"></script>
+	<script src="../classes/pages.js"></script>
+	<script src="../classes/fs.js"></script>
+	<script src="../classes/dialogs.js"></script>
+	<script src="../classes/settings.js"></script>
+
+	<title>Settings</title>
+
+	<style>
+
+		body {
+			padding: 20px;
+			overflow-y: auto;
+		}
+
+		table {
+			width: 100%;
+		}
+
+		td:first-child {
+			width: 200px;
+			font-size: 10pt;
+		}
+
+		td input {
+			width: 85%;
+		}
+	</style>
+
+</head>
+<body class="font">
+
+<div align="center">
+	<button class="btn_pad running">Настройки IDE</button>
+	<button class="btn_pad" onclick="$url('plugins.html');">Плагины</button>
+</div>
+
+<table>
+	<tr><td><b>Общее</b><td>
+	<tr><td>Оформление<td><select id="ide_theme" oninput="_set_sett(this.id, this.value, 'string');">
+		<option value="ide_violet">NW.js IDE Violet</option>
+		<option value="ide_dark">NW.js IDE Dark</option>
+		<option value="ide_white">NW.js IDE White</option>
+	</select>
+	<tr><td>Путь к NW.js<td><input type="text" id="s_nw"><button onclick="_sel_file('s_nw');">...</button>
+	<tr><td colspan="2" class="small">Так же вы можете воспользоваться автоматической установкой: <span onclick="Sett.install_nw($('auto_install_nw_area'), $('s_nw'), SAVE);" class="link">Скачать и Установить NW.js</span>
+																		<br><span class="small">Для Windows требуются права администратора</span>
+	<tr><td colspan="2" class="small" id="auto_install_nw_area">
+	<tr><td height="10"><td>
+	<tr><td>Общая папка проектов<td><input type="text" id="s_prjs"><button onclick="_sel_dir('s_prjs');">...</button>
+
+	<tr><td height="10"><td>
+	<tr><td><b>Редактор кода</b><td>
+	<tr><td>Размер шрифта<td><input type="number" id="editor_font_size" oninput="_set_sett(this.id, this.value, 'number');">
+	<tr><td>Ширина табуляции<td><input type="number" id="editor_tab_size" oninput="_set_sett(this.id, this.value, 'number');">
+	<tr><td>Оформление<td><select id="editor_theme" oninput="_set_sett(this.id, this.value, 'string');">
+		<option value="nwjside">NW.js IDE</option>
+		<option value="ambiance">Ambiance</option>
+		<option value="gruvbox">Gruvbox</option>
+		<option value="idle_fingers">Idle Fingers</option>
+		<option value="monokai">Monokai</option>
+		<option value="twilight">Twilight</option>
+		<option value="dracula">Dracula</option>
+		<option value="eclipse">Eclipse</option>
+		<option value="chrome">Chrome</option>
+		<option value="dawn">Dawn</option>
+	</select>
+	<tr><td>Мягкая табуляция<td><select id="editor_use_soft_tabs" oninput="_set_sett(this.id, this.value, 'boolean');">
+																<option>true</option>
+																<option>false</option>
+															</select>
+
+	<tr><td height="10"><td>
+	<tr><td><b>Запуск и отладка</b><td>
+	<tr><td>Скрывать отладчик по завершению проекта<td><select id="debug_auto_close" oninput="_set_sett(this.id, this.value, 'boolean');">
+		<option>false</option>
+		<option>true</option>
+	</select>
+
+
+
+</table>
+
+<br>
+<span onclick="Project.close();" class="link">Закрыть открытый проект</span>
+
+<script>
+	$('s_nw').value = IDE.get_conf('nw_path');
+	$('s_prjs').value = IDE.get_conf('all_projects');
+
+	_for(Sett.all(), function (val, key) {
+		if ($(key)) {
+			$(key).value = val;
+		}
+	});
+
+	var _sel_file = function (id) {
+		Dial.file('', function (dir) {
+			$(id).value = dir;
+		});
+	};
+
+	var _sel_dir = function (id) {
+		Dial.dir('', function (dir) {
+			$(id).value = dir;
+		});
+	};
+
+	var _set_sett = function (key, val, type) {
+		if (type === 'number') val = parseFloat(val);
+		else if (type === 'boolean') val = val === 'true';
+
+		Sett.set(key, val);
+		Sett.save();
+		if (key === 'ide_theme') Dial.need_restart();
+	};
+
+	var SAVE = function () {
+		IDE.set_conf('nw_path', $('s_nw').value);
+		IDE.set_conf('all_projects', $('s_prjs').value);
+		IDE.save_conf();
+
+		Dial.notify('Сохранено!');
+		Pages.refresh_all();
+	};
+
+	// LOAD THEME ///////////////////////////////////////////////////
+	$set_theme(Sett.get('ide_theme'), '../');
+	/////////////////////////////////////////////////////////////////
+</script>
+
+</body>
+</html>

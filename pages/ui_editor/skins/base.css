@@ -1,0 +1,203 @@
+
+/* ALL */
+
+*[data-tag] {
+	box-sizing: border-box;
+}
+
+/* TextArea */
+
+*[data-tag="area"] {
+	resize: none;
+}
+
+/* Buttons, Lists, Colors */
+
+*[data-tag="button"], *[data-tag="list"], *[data-tag="color"] {
+	display: inline-block;
+	font-size: 13.3333px;
+}
+
+*[data-tag="button"] {
+	text-align: center;
+}
+
+/* CheckBox */
+
+*[data-tag="checkbox"] {
+	cursor: pointer;
+	user-select: none;
+	display: inline-flex;
+	align-items: stretch;
+}
+
+*[data-tag="checkbox"] b {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	transition-duration: 200ms;
+	border-radius: 1px;
+}
+
+*[data-tag="checkbox"] span {
+	padding-left: 5px;
+	flex: 1;
+}
+
+*[data-tag="checkbox"][data-checked="true"] b {
+
+}
+
+/* Progress */
+
+*[data-tag="progress"] {
+	position: relative;
+	border-radius: 2px;
+	display: inline-block;
+	height: 10px;
+	width: 150px;
+	overflow: hidden;
+	padding: 0; margin: 0;
+	user-select: none;
+}
+
+*[data-tag="progress"] b {
+	position: absolute;
+	margin: 0; padding: 0;
+	top: 0; left: 0;
+	display: inline-block;
+	height: 100%;
+	box-sizing: border-box;
+	transition-duration: 200ms;
+}
+
+/* ListBox */
+
+*[data-tag="listbox"] {
+	display: inline-block;
+	height: 100px; width: 100px;
+	overflow: auto;
+	user-select: none;
+}
+
+*[data-tag="listbox"] span {
+	display: inline-block;
+	padding: 2px 4px;
+	width: 100%;
+	box-sizing: border-box;
+	text-align: left;
+	transition-duration: 200ms;
+}
+
+
+
+/* Range */
+
+*[data-tag="range"] {
+	position: relative;
+	border-radius: 2px;
+	display: inline-block;
+	height: 15px;
+	width: 150px;
+	overflow: hidden;
+	padding: 0; margin: 0;
+	box-sizing: border-box;
+	user-select: none;
+}
+
+*[data-tag="range"] b {
+	top: 0;
+	position: absolute;
+	margin: 0; padding: 0;
+	display: inline-block;
+	height: 100%;
+	width: 20px;
+	box-sizing: border-box;
+}
+
+
+
+/* Tabs */
+
+*[data-tag="tabs"] {
+	display: inline-flex;
+	flex-wrap: nowrap;
+	overflow: hidden;
+}
+
+*[data-tag="tabs"] *[data-tab] {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	font-size: 13.5px;
+	transition-duration: 200ms;
+	cursor: pointer;
+	user-select: none;
+}
+
+*[data-tag="tabs"] *[data-tab="selected"] {
+
+}
+
+*[data-tag="tabs"] .name {
+	flex: 1;
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+*[data-tag="tabs"] .close {
+	transition-duration: 200ms;
+	padding-right: 4px;
+	cursor: pointer;
+}
+
+*[data-tag="tabs"] .close:hover {
+
+}
+
+
+/* Pages */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ScrollBars */
+
+*[data-tag]::-webkit-scrollbar {
+	background-color: transparent;
+	width: 5px;
+	height: 5px;
+}
+
+*[data-tag]::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+*[data-tag]::-webkit-scrollbar-thumb {
+	background-color: #777777;
+}
+
+*[data-tag]::-webkit-scrollbar-corner {
+	background-color: transparent;
+}

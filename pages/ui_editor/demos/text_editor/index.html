@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+	<script src="ui.js"></script>
+</head>
+<body>
+<script>
+	UI.init('editor.ui');
+
+  var _path = '';
+
+  var _write = function (path) {
+    _path = path;
+    UI.Files.writeText(path, UI.get('text').value(), (text) => { alert(text) });
+    UI.Application.title(_path);
+  };
+
+  var _read = function (path) {
+    _path = path;
+    UI.get('text').value(UI.Files.readText(path));
+    UI.Application.title(_path);
+  };
+
+  UI.on('open', function () {
+    UI.Dialog.file('', _read);
+  });
+
+  UI.on('save', function () {
+    if (_path)
+      _write(_path);
+    else
+      UI.Dialog.save('', _write);
+  });
+
+</script>
+</body>
+</html>

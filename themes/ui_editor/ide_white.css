@@ -1,0 +1,179 @@
+#ui_palitra {
+	background-color: #c8c8c8;
+	color: #3a3a3a;
+}
+
+#_ui_palitra {
+
+}
+
+#_ui_form_templates {
+
+}
+
+#_ui_editor_root {
+
+}
+
+#_ui_editor {
+	background-color: #ccc8bb;
+}
+
+#_ui_title {
+	background-color: #a3a3a3;
+	color: #3c3c3c;
+}
+
+#_ui_body {
+	border-top: none;
+}
+
+#_ui_body * {
+
+}
+
+
+
+
+
+
+
+._ui_box {
+	box-shadow: 0 0 2px 1px red, 0 0 2px 2px white !important;
+}
+
+.can_drop {
+	box-shadow: 0 0 3px 2px #427828, 0 0 2px 4px #FFBC00 !important;
+}
+
+.not_can_drop {
+	box-shadow: -5px 0 1px 1px #786240, -5px 0 1px 1px #ffb793 !important;
+}
+
+#_ui_body *[data-tag] {
+	transition-duration: 200ms;
+}
+
+#_ui_body *[data-tag]:hover {
+	box-shadow: 0 0 3px 2px #B4F0B4, 0 0 5px 1px #417244;
+}
+
+
+
+
+
+
+
+
+#ui_object {
+
+}
+
+#ui_object input, #ui_object textarea {
+
+}
+
+#ui_object table{
+
+}
+
+#ui_object td {
+
+}
+
+#ui_object td:first-child {
+
+}
+
+
+
+.flow {
+
+}
+
+
+
+#_ui_control button {
+
+}
+
+
+#ui_settings {
+
+}
+
+#ui_settings textarea, #ui_settings input, #ui_settings select {
+	border: 1px solid #d0d0d0;
+	background-color: #d4d4d4;
+	color: #2f2f2f;
+}
+
+._ui_edit_in_table {
+
+}
+
+#css_settings {
+
+}
+
+#events_settings_area {
+
+}
+
+#css_settings_area {
+
+}
+
+._ui_header {
+	margin-top: 1px;
+	color: #505050;
+	background-color: #e5e5e5;
+}
+
+._ui_btn {
+	background-color: #b6b6b6;
+	color: #2a2a2a;
+	margin: 2px;
+}
+
+.black_input {
+	background-color: #e7fff8;
+	color: #242b0f;
+}
+
+._ui_cat {
+	color: #2a2a2a;
+	background-color: #a7a7a7;
+}
+
+._ui_opcl {
+
+}
+
+._ui_cat_items {
+	color: black;
+}
+
+._ui_cat_item {
+	border: 1px solid #AFAFAF;
+	background-color: #D6D6D6;
+}
+
+._ui_cat_item img {
+	filter: invert(70%);
+}
+
+._ui_cat_item:hover {
+	border: 1px solid #7B7B7B;
+	background-color: #E3E3E3;
+}
+
+._ui_tree_select {
+	background-color: #424242;
+}
+
+
+
+
+
+

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hello, NW.js!</title>
+</head>
+<body>
+	<h1>I'm NW.js Project!</h1>
+	<b id="nw_version"></b>
+
+	<script>
+		var os = require('os');
+		document.getElementById('nw_version').innerHTML = 'You are running on '+ os.platform();
+	</script>
+
+</body>
+</html>

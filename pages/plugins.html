@@ -1,0 +1,98 @@
+<!doctype html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+	<link rel="stylesheet" href="../themes/ide.css">
+
+	<script src="../classes/ide.js"></script>
+	<script src="../classes/pages.js"></script>
+	<script src="../classes/fs.js"></script>
+	<script src="../classes/dialogs.js"></script>
+	<script src="../classes/settings.js"></script>
+	<script src="../classes/plugins.js"></script>
+
+	<title>Settings!</title>
+
+	<style>
+
+		body {
+			padding: 20px;
+			overflow-y: auto;
+		}
+
+		table {
+			width: 100%;
+			margin-top: 5px;
+		}
+
+		td:first-child {
+			width: 100px;
+		}
+
+		td input {
+			width: 100%;
+		}
+
+	</style>
+
+</head>
+<body class="font">
+
+<div align="center">
+	<button class="btn_pad" onclick="$url('settings.html');">Назад</button>
+	<button class="btn_pad running">Плагины</button>
+</div>
+
+<table class="small">
+	<tr><td>Добавить плагин<td><input type="text" id="pl_add"><td><button onclick="_sel_dir('pl_add');">...</button><td><button onclick="_add();">Добавить</button>
+	<tr><td><td align="right">Укажите путь к папке с файлом package.json вашего плагина
+</table>
+<br>
+<div id="pl_list"></div>
+
+
+
+<script>
+	var delm = Fs.delm;
+
+	var _sel_dir = function (id) {
+		Dial.dir('', function (dir) {
+			$(id).value = dir;
+		});
+	};
+
+	var _add = function () {
+		var path = $('pl_add').value.trim();
+		if (!path) return;
+
+		Plugins.add(path, function (s) {
+			if (s === 'success') {
+				Dial.notify('Плагин добавлен');
+				$reload();
+				Dial.need_restart();
+			}
+		});
+	};
+
+	var list = Plugins.get_all();
+	_for(list, function (plugin) {
+		var info = Fs.read_file(plugin+'/package.json', 'json');
+		var div = $create('div');
+		div.className = 'plugin';
+		div.innerHTML = '<b>'+info.name+'</b> <button class="btn_red" onclick="if (confirm(\'Действительно удалить?\')) Plugins.del(\''+ep(plugin)+'\'); $reload();">Удалить</button>'+
+										' <button onclick="Pages.add(\'pages/editor.html#'+ep(plugin)+'/config.json'+'\', \'Настройки: '+info.name+'\');">Настройки</button>'+
+										'<br>'+info.description+
+										'<br>Версия: '+info.version;
+
+		$('pl_list').appendChild(div);
+	});
+
+
+	// LOAD THEME ///////////////////////////////////////////////////
+	$set_theme(Sett.get('ide_theme'), '../');
+	/////////////////////////////////////////////////////////////////
+</script>
+
+</body>
+</html>

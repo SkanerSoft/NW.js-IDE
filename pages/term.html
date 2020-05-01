@@ -1,0 +1,66 @@
+<!doctype html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+	<link rel="stylesheet" href="../themes/ide.css">
+
+	<script src="../classes/ide.js"></script>
+	<script src="../classes/fs.js"></script>
+	<script src="../classes/project.js"></script>
+	<script src="../classes/term.js"></script>
+	<script src="../classes/settings.js"></script>
+
+	<title>Run JavaScript File</title>
+
+	<style>
+
+		body {
+			height: 100vh;
+		}
+
+		table {
+			width: 100%;
+		}
+
+		table td:first-child {
+			width: 10px;
+			text-align: center;
+		}
+
+		input {
+			border: none;
+			width: 100%;
+		}
+
+	</style>
+
+</head>
+<body class="font">
+
+<div class="terminal">
+	<div id="terminal_out" class="terminal_out"></div>
+	<div class="terminal_in" id="terminal_in">
+		<input type="text" id="terminal_input">
+	</div>
+</div>
+
+<script>
+	$('terminal_input').onkeyup = function (e) {
+		if (e.keyCode !== 13) return;
+		e.preventDefault();
+		e.stopPropagation();
+		Term.cmd(this.value);
+
+		this.value = '';
+	};
+
+	Term.log = $('terminal_out');
+
+	// LOAD THEME ///////////////////////////////////////////////////
+	$set_theme(Sett.get('ide_theme'), '../');
+	/////////////////////////////////////////////////////////////////
+</script>
+
+</body>
+</html>

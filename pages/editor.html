@@ -1,0 +1,339 @@
+<!doctype html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+	<link rel="stylesheet" href="../themes/ide.css">
+
+	<script src="ace/ace.js"></script>
+	<script src="ace/ext-language_tools.js"></script>
+
+	<script src="../classes/ide.js"></script>
+	<script src="../classes/events.js"></script>
+	<script src="../classes/session.js"></script>
+	<script src="../classes/fs.js"></script>
+	<script src="../classes/pages.js"></script>
+	<script src="../classes/settings.js"></script>
+	<script src="../classes/dialogs.js"></script>
+	<script src="../classes/plugins.js"></script>
+	<script src="../classes/project.js"></script>
+	<script src="../classes/legacy.js"></script>
+	<script src="../classes/files.js"></script>
+
+	<script src="../classes/context.js"></script>
+	<script src="../classes/editor_tools.js"></script>
+	<script src="../classes/helper.js"></script>
+
+	<style>
+		.ace_cursor {
+			transition-duration: 60ms;
+		}
+	</style>
+
+	<title>Hello!</title>
+</head>
+<body>
+
+<div style="display: flex; height: 100%">
+	<div id="editor" style="flex: 1; padding: 10px;"></div>
+	<div class="tool_list" id="tool_list">
+		<button id="tools_open_list" class="btn btn_pad2 full_width">//</button>
+		<br><button id="tools_open_funcs" class="btn btn_pad2 full_width">();</button>
+		<br><button id="tools_open_ui" class="btn btn_pad2 full_width">&#9004;</button>
+	</div>
+</div>
+
+<script>
+	var file = location.hash.replace('#', '');
+	var source = '';
+	var _error = false;
+	var filename = Fs.parse(file)['name'];
+	var modify = false;
+
+	if (!Fs.is_file(file)) {
+		_error = true;
+	} else {
+		source = Fs.read_file(file).toString();
+	}
+
+	var mode = Fs.parse(file)['ex'];
+
+	var langs = ace.require("ace/ext/language_tools");
+	var editor = ace.edit($('editor'), {
+		selectionStyle : "text"
+	});
+
+	var modes = {
+		'js' : 'ace/mode/javascript',
+		'html' : 'ace/mode/html',
+		'css' : 'ace/mode/css',
+		'json' : 'ace/mode/json',
+		'php' : 'ace/mode/php'
+	};
+
+	// RUN EVENT ////////////////////////////////////////////////////
+	Events.run('editor:init', W, editor);
+	/////////////////////////////////////////////////////////////////
+
+	editor.setTheme('ace/theme/'+Sett.get('editor_theme'));
+	editor.setShowPrintMargin(false);
+
+	editor.setOptions({
+		enableBasicAutocompletion : true,
+		enableSnippets : true,
+		enableLiveAutocompletion : true
+	});
+
+	var s = function () {
+		return editor.getSession();
+	};
+
+	s().setOptions({
+		mode : modes[mode],
+		tabSize : Sett.get('editor_tab_size'),
+		useSoftTabs : Sett.get('editor_use_soft_tabs')
+	});
+
+	editor.setFontSize(Sett.get('editor_font_size'));
+	editor.setBehavioursEnabled(true);
+
+	s().setValue(source);
+
+	// GLOBAL FUNCTIONS //////////////////////////////////////////////////////////
+
+	var GET_KEYS = function () {
+		var text = GET();
+		if (!text) return [];
+		var alias = filename;
+
+		if (!text) return [];
+		var newArr = [];
+
+		text = text.toString().replace(/[\W]+/gi, ' ');
+
+		text = text.replace(/\s\w{1,2}\s/gi, ' ');
+		text = text.replace(/[\s\t]+/gi, ',');
+		text = text.replace(/"/gi, '');
+		text = text.replace(/(const\b|this\b|http\b|var\b|while\b|for\b|function\b|style\b|backgroundColor\b|return\b)/gi, '');
+		text = text.replace(/,+/gi, ',');
+		text = text.split(',');
+		var i = text.length - 1, t;
+
+		var used = {};
+
+		for (; i >= 0; i--) {
+			t = text[i].toString().trim();
+			if (t === '' || t.length < 3 || t in used || !isNaN(parseInt(t))) continue;
+			used[t] = 1;
+			newArr.push({
+				word : t,
+				alias : alias
+			});
+		}
+
+		return newArr;
+	};
+
+	var UPDATE_KEYS = function (keywords) {
+		langs.completers = [];
+		langs.addCompleter({
+			getCompletions: function(editor, session, pos, prefix, callback) {
+				if (prefix.length === 0) { callback(null, []); return; }
+				callback(null, keywords.map(function(el) {
+					return {
+						name : el.word,
+						value : el.word,
+						meta : el.alias
+					};
+				}));
+			}
+		});
+	};
+
+	var RELOAD = function () {
+		SAVE();
+		location.reload();
+	};
+
+	var FOCUS = function () {
+		editor.focus();
+	};
+
+	var SAVE = function () {
+		FOCUS();
+		if (!modify) return;
+
+		Fs.write_file(file, editor.getValue());
+
+		var cp = editor.getCursorPosition();
+		Project.set('curpos'+file, JSON.stringify(cp));
+
+		if (Project.get_type() === 'legacy') {
+			var pkg = Project.get_package();
+			if (pkg['liveedit']) {
+				if (Legacy.is_exe()) {
+					Legacy.start();
+				}
+			}
+		}
+
+		Dial.notify('Сохранено!');
+		modify = false;
+	};
+
+	var RESTORE = function () {
+		editor.selectAll();
+		editor.insert(source);
+	};
+
+	var GET = function () {
+		return editor.getValue();
+	};
+
+	var CUT = function () {
+		var data = s().getTextRange(editor.getSelectionRange());
+		if (!data) {
+			var line = editor.getSelectionRange().start.row;
+			data = s().getLine(line);
+			IDE.to_buffer(data);
+			var r = editor.getSelectionRange();
+			r.setStart(line, 0);
+			r.setEnd(line, data.length);
+			s().remove(r);
+		} else {
+			s().remove(editor.getSelectionRange());
+			IDE.to_buffer(data);
+		}
+		Context.close();
+	};
+
+	var COPY = function () {
+		var data = s().getTextRange(editor.getSelectionRange());
+		if (data !== '') IDE.to_buffer(data);
+		else {
+			var line = editor.getSelectionRange().start.row;
+			IDE.to_buffer(s().getLine(line));
+		}
+		Context.close();
+	};
+
+	var PASTE = function () {
+		var data = IDE.get_buffer();
+		if (data === '') return;
+		editor.insert(data);
+		Context.close();
+		FOCUS();
+	};
+
+	var _color = function () {
+		var old_color = editor.getSelectedText();
+		Dial.color(function (new_color) {
+			if (old_color.length === 6 || old_color.length === 3)
+				new_color = new_color.replace('#', '');
+			editor.insert(new_color);
+			FOCUS();
+		}, old_color);
+	};
+
+	Context.add('Выбор цвета', function () {
+		_color();
+	}, true, function (btn) {
+		btn.style.float = 'right';
+		var old_color = editor.getSelectedText();
+		if (!$is_color(old_color)) return;
+		btn.style.color = btn.style.backgroundColor = old_color.length < 7 ? '#'+old_color : old_color;
+	});
+	Context.br();
+
+	var CONTEXT = function () {
+		Context.open();
+	};
+
+	// EVENTS ///////////////////////////////
+
+	editor.on('change', function () {
+		modify = true;
+	});
+
+	editor.commands.addCommand({
+		name: 'move_line_down',
+		bindKey: {win: 'Ctrl-Shift-Down',  mac: 'Command-Shift-Down'},
+		exec: function(editor) {
+			editor.moveLinesDown();
+		},
+		readOnly: true
+	});
+
+	editor.commands.addCommand({
+		name: 'move_line_up',
+		bindKey: {win: 'Ctrl-Shift-Up',  mac: 'Command-Shift-Up'},
+		exec: function(editor) {
+			editor.moveLinesUp();
+		},
+		readOnly: true
+	});
+
+	editor.commands.addCommand({
+		name: 'save',
+		bindKey: {win: 'Ctrl-S',  mac: 'Command-S'},
+		exec: function(editor) {
+			SAVE();
+		},
+		readOnly: true
+	});
+
+	editor.commands.addCommand({
+		name: 'color_select',
+		bindKey: {win: 'Ctrl-Shift-C',  mac: 'Command-Shift-S'},
+		exec: function(editor) {
+			_color();
+		},
+		readOnly: true
+	});
+
+	var cp = Project.get('curpos'+file);
+	if (cp) {
+		editor.moveCursorToPosition(JSON.parse(cp));
+	}
+
+	// RUN EVENT ////////////////////////////////////////////////////
+	Events.run('editor:loaded', W, editor);
+	/////////////////////////////////////////////////////////////////
+
+	$('tools_open_list').onclick = function (e) { Tools.open('list_cats', editor.getValue()); };
+	$('tools_open_funcs').onclick = function (e) { Tools.open('list_funcs', editor.getValue()); };
+	$('tools_open_ui').onclick = function (e) { Tools.open('list_ui'); };
+
+	if (mode !== 'html' || (Project.get_type() !== 'nw' && Project.get_type() !== 'nwui')) $show_hide('tools_open_ui', 'none');
+
+	Helper.add_tool(filename, mode);
+
+	// RUN EVENT ////////////////////////////////////////////////////
+	Events.run('editor:loaded_tool_list', W, $('tool_list'));
+	/////////////////////////////////////////////////////////////////
+
+	W.addEventListener('click', function () {
+		Context.close();
+	});
+
+	W.addEventListener('load', function () {
+		Pages.update_keys(file);
+		// RUN EVENT ////////////////////////////////////////////////////
+		Events.run('page:loaded', W);
+		/////////////////////////////////////////////////////////////////
+	});
+
+	if (_error) {
+		SAVE = RELOAD = RESTORE = GET = CUT = PASTE = COPY = function () {};
+		s().setValue(file+'\nФайл не найден.\nПопробуйте открыть файл из дерева проекта.');
+	}
+
+	IDE.update_key(W);
+
+	// LOAD THEME ///////////////////////////////////////////////////
+	$set_theme(Sett.get('ide_theme'), '../');
+	/////////////////////////////////////////////////////////////////
+</script>
+
+</body>
+</html>

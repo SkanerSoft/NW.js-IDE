@@ -1,0 +1,48 @@
+{
+  "UI" : {
+    "init" : ["Инициализация UI из файла", "S path_to_file"],
+    "get" : ["Получить объект по ID", "S id", "NodeControl"],
+    "find" : ["Получить массив объектов по тегу", "S tag", "A NodeControl"],
+    "group" : ["Получить массив объектов по группе", "S group", "A NodeControl"],
+    "on" : ["Назначить обработчик UI события", "S event, F clb"],
+    "devTools" : ["Открыть консоль отладки Chromium (только SDK)"]
+  },
+
+  "objects" : {
+
+    "Application" : {
+      "close" : ["Закрыть"],
+      "title" : ["Получить или присвоить заголовок окна", "[S title]", "S"]
+    },
+
+    "Dialog" : {
+      "save" : ["Сохранить файл как...", "S default_name, F clb(path)"],
+      "file" : ["Выбрать файл", "S default_path, F clb(path)"],
+      "folder" : ["Выбрать каталог", "S default_path, F clb(path)"],
+      "color" : ["Выбрать цвет", "S #HEX, F clb(#HEX)"]
+    },
+
+    "Files" : {
+      "readText" : ["Прочитать файл, как текст", "S path", "S"],
+      "writeText" : ["Записать текстовые данные в файл", "S path, S data, F if_error_callback(error)"]
+    }
+
+  },
+
+  "components" : {
+    "NodeControl" : {
+      "node" : "DOM элемент",
+      "tag" : "Класс объекта",
+
+      "parent" : ["Получить родительский объект", "", "NodeControl"],
+      "dom" : ["Получить DOM элемент", "", "DOMElement"],
+      "del" : ["Удалить объект"],
+      "text" : ["Получить или присвоить надпись на объекте", "[S new_text]", "S"],
+      "value" : ["Получить или присвоить значение объекта", "[S new_value]", "S"],
+      "on" : ["Добавить обработчик события", "S event, F clb"],
+      "css" : ["Получить или присвоить набор CSS стили", "[O css_values]", "O css_values"],
+      "attr" : ["Получить или присвоить набор атрибутов (свойств) оъекту", "[O attributes]", "O attributes"]
+    }
+  }
+
+}

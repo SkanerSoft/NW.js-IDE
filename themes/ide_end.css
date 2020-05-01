@@ -1,0 +1,31 @@
+input, select, textarea {
+	transition-duration: 200ms;
+}
+
+
+/* BUTTONS */
+
+button, .btn {
+	transition-duration: 200ms;
+}
+
+.link {
+	transition-duration: 200ms;
+}
+
+.tab {
+	transition-duration: 200ms;
+}
+
+.frame {
+	transition-duration: 100ms;
+}
+
+.dialog {
+	transition-duration: 200ms;
+}
+
+.files_item {
+	transition-duration: 200ms;
+}
+

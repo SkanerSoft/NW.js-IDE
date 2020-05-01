@@ -1,0 +1,74 @@
+<!doctype html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+	<link rel="stylesheet" href="../themes/ide.css">
+
+	<script src="../classes/ide.js"></script>
+	<script src="../classes/events.js"></script>
+	<script src="../classes/fs.js"></script>
+	<script src="../classes/pages.js"></script>
+	<script src="../classes/dialogs.js"></script>
+	<script src="../classes/project.js"></script>
+	<script src="../classes/files.js"></script>
+	<script src="../classes/debug.js"></script>
+	<script src="../classes/units.js"></script>
+	<script src="../classes/settings.js"></script>
+	<script src="../classes/lang.js"></script>
+	<script src="../classes/node.js"></script>
+	<script src="../classes/legacy.js"></script>
+	<script src="../classes/term.js"></script>
+	<script src="../classes/plugins.js"></script>
+	<script src="../classes/net.js"></script>
+	<script src="../classes/session.js"></script>
+
+	<script src="../classes/context.js"></script>
+
+	<title>Hello!</title>
+</head>
+<body class="font">
+
+	<div id="custom_content"></div>
+
+	<script>
+		var delm = Fs.delm;
+		var files = location.hash.replace('#', '');
+		files = files.split('#');
+		var file = files[0];
+
+		if (Fs.is_file(file)) {
+			$('custom_content').innerHTML = Fs.read_file(file);
+			location.hash = files[1] || '';
+
+			var scrs = $('custom_content').getElementsByTagName('script');
+			var bin = '';
+
+			_for(scrs, function (el) {
+				if (el.getAttribute('file')) {
+					bin += ';'+Fs.read_file(Fs.parse_dir(file)['back']+'/'+el.getAttribute('file')).toString();
+					return;
+				}
+				bin += ';'+el.innerHTML;
+			});
+
+			var f_bin = new Function(bin);
+			try {
+				f_bin();
+			} catch (e) {
+				Debug.err(e.message);
+			}
+		} else {
+			Dial.notify('Файл '+file+' не найден!', 'notify_no');
+		}
+
+		W.onerror = function (e) {
+			Debug.err(e.message);
+		};
+
+		// LOAD THEME ///////////////////////////////////////////////////
+		$set_theme(Sett.get('ide_theme'), '../');
+		/////////////////////////////////////////////////////////////////
+	</script>
+</body>
+</html>

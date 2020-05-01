@@ -1,0 +1,127 @@
+*[data-tag="root"] {
+	color: #ffffff;
+	background-color: #34422e;
+}
+
+*[data-tag="button"], *[data-tag="list"], *[data-tag="color"] {
+	background-color: #445b41;
+	border: 1px solid #43b65c;
+	color: white;
+	border-radius: 5px;
+}
+
+*[data-tag="area"] {
+	background-color: #445b41;
+	border: 1px solid #43b65c;
+	color: white;
+	border-radius: 5px;
+}
+
+*[data-tag="input"] {
+	background-color: #445b41;
+	border: 1px solid #43b65c;
+	color: white;
+	border-radius: 5px;
+}
+
+*[data-tag="checkbox"] b {
+	border: 1px solid #85ad6f;
+	background-color: #dcd08c;
+}
+
+*[data-tag="checkbox"][data-checked="true"] b {
+	background-color: #36d600;
+	border-color: #6FAA69;
+	box-shadow: 0 0 1px 1px #D9ECD7;
+	transform: rotate(90deg);
+}
+
+*[data-tag="progress"] {
+	border: 1px solid #3bb357;
+}
+
+*[data-tag="progress"] b {
+	background-color: #71c86f;
+}
+
+*[data-tag="listbox"] {
+	border: 1px solid #6fb96d;
+	background-color: #d9f3dd;
+	border-radius: 2px;
+}
+
+*[data-tag="listbox"] span {
+
+}
+
+*[data-tag="listbox"] span[data-selected="true"] {
+	background-color: #4a6745;
+	color: white;
+}
+
+*[data-tag="range"] {
+	border: 1px solid #4f8e63;
+}
+
+*[data-tag="range"] b {
+	background-color: #4f8e63;
+}
+
+
+*[data-tag="tabs"] {
+	border: 1px solid #375e43;
+}
+
+*[data-tag="tabs"] *[data-tab] {
+	background: #445b41;
+	color: #e8e8e8;
+}
+
+*[data-tag="tabs"] *[data-tab="selected"] {
+	background: #2c7732;
+	color: #ffffff;
+}
+
+*[data-tag="tabs"] .name {
+
+}
+
+*[data-tag="tabs"] .close {
+
+}
+
+*[data-tag="tabs"] .close:hover {
+	color: #FF0000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*[data-tag]::-webkit-scrollbar {
+	background-color: transparent;
+}
+
+*[data-tag]::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+*[data-tag]::-webkit-scrollbar-thumb {
+	background-color: #3e6938;
+}
+
+*[data-tag]::-webkit-scrollbar-corner {
+	background-color: transparent;
+}

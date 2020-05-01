@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>UI Editor</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="ui_editor/style.css">
+	<link rel="stylesheet" href="ui_editor/skins/base.css">
+
+	<script src="../classes/ide.js"></script>
+	<script src="../classes/events.js"></script>
+	<script src="../classes/session.js"></script>
+	<script src="../classes/fs.js"></script>
+	<script src="../classes/pages.js"></script>
+	<script src="../classes/settings.js"></script>
+	<script src="../classes/dialogs.js"></script>
+	<script src="../classes/plugins.js"></script>
+	<script src="../classes/files.js"></script>
+	<script src="../classes/project.js"></script>
+
+	<style id="_ui_def_css"></style>
+	<style id="_ui_css_skin"></style>
+
+</head>
+<body>
+
+	<div id="_root_ui_editor" class="_root_ui_editor">
+		<div id="ui_palitra" class="ui_palitra">
+			<!--<div class="_ui_header hnd" onclick="Ed.tgl_height('_ui_form_templates');">Шаблоны UI</div>-->
+			<!--<div class="flow _ui_form_templates" id="_ui_form_templates"></div>-->
+			<div class="_ui_header hnd" onclick="Ed.tgl_height('_ui_objects');">Палитра объектов</div>
+			<div class="flow _ui_objects" id="_ui_objects"></div>
+			<div class="_ui_header hnd" onclick="Ed.tgl_height('_ui_tree');">Дерево объектов</div>
+			<div class="flow _ui_tree" id="_ui_tree">
+				<div class="as_flex" id="_ui_root_btn"><div class="_ui_btn flex" onclick="Ed.unselect();">Root</div></div>
+			</div>
+
+		</div>
+		<div id="_ui_editor" class="_ui_editor">
+			<div id="_ui_editor_root" class="_ui_editor_root">
+				<div id="_ui_title" class="_ui_title">&nbsp;</div>
+				<div id="_ui_body" data-tag="root" class="_ui_body"></div>
+			</div>
+		</div>
+		<div id="ui_object" class="ui_object">
+			<div id="ui_settings" class="ui_settings">
+				<div class="_ui_header hnd" id="_ui_name_object" onclick="Ed.tgl_height('_ui_control');">Управление</div>
+				<div class="flow _ui_control" id="_ui_control"></div>
+				<div class="_ui_header hnd" onclick="Ed.tgl_height('_ui_settings');">Аттрибуты</div>
+				<div class="flow _ui_settings" id="_ui_settings"></div>
+				<div class="_ui_header hnd" onclick="Ed.tgl_height('_ui_events');">События</div>
+				<div class="flow _ui_events" id="_ui_events" style="height: 0">
+					<textarea class="events_settings_area black_input" placeholder="event: function_name;" id="events_settings_area" oninput="Ed.set_e(this.value);"></textarea>
+				</div>
+
+			</div>
+			<div class="_ui_header"><div class="as_flex"><div class="flex">CSS Свойства</div><select id="_ui_templates_css" onchange="Ed.add_css_tpl(this.value);"></select></div></div>
+			<textarea placeholder="color: black;" class="css_settings_area black_input" id="css_settings_area" oninput="Ed.set_css(this.value);"></textarea>
+		</div>
+	</div>
+
+	<script src="ui_editor/ui.js"></script>
+	<script src="ui_editor/editor.js"></script>
+
+
+	<script>
+		var file = location.hash.replace('#', '');
+		var source = '';
+		var _error = false;
+		var filename = Fs.parse(file)['name'];
+		var modify = false;
+
+		if (!Fs.is_file(file)) {
+			_error = true;
+		} else {
+			source = Fs.read_file(file).toString();
+		}
+
+		// RUN EVENT ////////////////////////////////////////////////////
+		Events.run('ui_editor:init', W, Ed);
+		/////////////////////////////////////////////////////////////////
+
+		var RELOAD = function () {
+			SAVE();
+			location.reload();
+		};
+
+		var FOCUS = function () {
+			W.focus();
+		};
+
+		var SAVE = function () {
+			FOCUS();
+//			if (!modify) return;
+
+			Fs.write_file(file, Ed.get());
+
+			Dial.notify('Сохранено!');
+			modify = false;
+		};
+
+		var RESTORE = function () {
+			if (confirm('Точно сбросить все изменения?'))
+				Ed.open(source);
+		};
+
+		var GET = function () {
+			return Ed.get();
+		};
+
+		if (source) Ed.open(source);
+		else Ed._set_global('skin', 'default');
+
+		// RUN EVENT ////////////////////////////////////////////////////
+		Events.run('ui_editor:loaded', W, Ed);
+		/////////////////////////////////////////////////////////////////
+
+		W.addEventListener('load', function () {
+			// RUN EVENT ////////////////////////////////////////////////////
+			Events.run('page:loaded', W);
+			/////////////////////////////////////////////////////////////////
+		});
+
+		var sett = Project.get_package();
+		if (sett && sett['window'] && sett['window']['width'] && sett['window']['height'])
+			$('_ui_def_css').innerHTML = '#_ui_body {width:'+sett['window']['width']+'px;height:'+sett['window']['height']+'px;}';
+
+		// LOAD THEME ///////////////////////////////////////////////////
+		 $set_theme(Sett.get('ide_theme'), '../', 'ui_editor');
+		/////////////////////////////////////////////////////////////////
+	</script>
+</body>
+</html>
